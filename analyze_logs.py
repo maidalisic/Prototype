@@ -8,13 +8,13 @@ def analyze_logs(file_path):
     with open(file_path, 'r') as file:
         log_text = file.read()
 
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+    response = openai.Completion.create(
+        engine="text-davinci-002",
         prompt="Analyze this log and summarize the errors: \n" + log_text,
-        max_tokens=3000
+        max_tokens=150
     )
 
-    return completion.choices[0].text.strip()
+    return response.choices[0].text.strip()
 
 if __name__ == "__main__":
     import sys
