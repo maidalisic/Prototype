@@ -19,8 +19,12 @@ def analyze_logs(file_path):
         ]
     )
 
-    # Gib die Nachricht der ersten Antwort zurück
-    return completion['choices'][0]['message']
+    # Überprüfe die Struktur des Antwortobjekts und greife entsprechend darauf zu
+    if completion.choices:
+        first_choice = completion.choices[0]
+        return first_choice.message if first_choice else "No completion found."
+    else:
+        return "No choices available in completion."
 
 # Beispielverwendung, wenn als Hauptskript ausgeführt
 if __name__ == "__main__":
